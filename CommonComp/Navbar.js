@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Classes from '../styles/Header.module.css';
-import Image from 'next/Image';
+import Image from 'next/image';
 
 const Navbar = () => {
     return (
