@@ -1,0 +1,26 @@
+.cardContainer {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
+  cursor: pointer;
+}
+
+.pizzaTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d1411e;
+}
+
+.pizzaPrice {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+}
+
+.pizzaDesc {
+  text-align: center;
+  color: #777;
+}
