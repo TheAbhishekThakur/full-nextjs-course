@@ -39,7 +39,7 @@ const PizzaDetails = ({ data }) => {
             src={data.image}
             alt="pizza"
             className={styles.pizzaImg}
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "500px" }}
           />
         </div>
       </div>
