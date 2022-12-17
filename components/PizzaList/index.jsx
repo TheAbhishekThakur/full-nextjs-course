@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../styles/PizzaList.module.css";
 import PizzaCard from "./components/PizzaCard";
 
-const PizzaList = () => {
+const PizzaList = ({ pizzaData }) => {
   return (
     <div className={styles.PizzaListCon}>
       <h1 className={styles.title}>THE BEST PIZZA IN INDIA</h1>
@@ -13,14 +13,11 @@ const PizzaList = () => {
         quisquam?
       </p>
       <div className={styles.wrapper}>
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
+        {pizzaData && pizzaData.length > 0
+          ? pizzaData.map((item, index) => (
+              <PizzaCard key={index} data={item} />
+            ))
+          : null}
       </div>
     </div>
   );

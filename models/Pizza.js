@@ -33,4 +33,4 @@ const PizzaSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model.Pizza || mongoose.model("Pizza", PizzaSchema);
+export default mongoose.models.Pizza || mongoose.model("Pizza", PizzaSchema);
