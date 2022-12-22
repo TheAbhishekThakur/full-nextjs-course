@@ -52,15 +52,15 @@ const PizzaDetails = ({ data }) => {
         </h3>
         <div className={styles.sizes}>
           <div className={styles.size} onClick={() => handleSize(0)}>
-            <Image src="/img/size.png" alt="size" width={100} height={100} />
+            <Image src="/img/size.png" alt="size" width={70} height={70} />
             <span className={styles.number}>Small</span>
           </div>
           <div className={styles.size} onClick={() => handleSize(1)}>
-            <Image src="/img/size.png" alt="size" width={100} height={100} />
+            <Image src="/img/size.png" alt="size" width={80} height={80} />
             <span className={styles.number}>Medium</span>
           </div>
           <div className={styles.size} onClick={() => handleSize(2)}>
-            <Image src="/img/size.png" alt="size" width={100} height={100} />
+            <Image src="/img/size.png" alt="size" width={90} height={90} />
             <span className={styles.number}>Large</span>
           </div>
         </div>
@@ -86,7 +86,12 @@ const PizzaDetails = ({ data }) => {
             onChange={(e) => setQty(e.target.value)}
             className={styles.quantity}
           />
-          <button className={styles.button}>Add to Cart</button>
+          <button
+            className={styles.button}
+            onClick={() => (window.location.href = "/cart")}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

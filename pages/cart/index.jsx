@@ -3,12 +3,15 @@ import React from "react";
 import styles from "../../styles/Cart.module.css";
 
 function Cart() {
+  const goToPayment = () => {
+    window.location.href = "/orders/1";
+  }
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <table className={styles.table}>
           <thead>
-            <tr className={styles.tr}>
+            <tr className={styles.trTitle}>
               <th>Product</th>
               <th>Name</th>
               <th>Extras</th>
@@ -18,7 +21,7 @@ function Cart() {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr className={styles.tr}>
               <td className={styles.td}>
                 <div>
                   <img src="/img/pizza.png" alt="" className={styles.img} />
@@ -33,16 +36,16 @@ function Cart() {
                 </span>
               </td>
               <td className={styles.td}>
-                <span style={styles.price}>20</span>
+                <span style={styles.price}>₹20</span>
               </td>
               <td className={styles.td}>
                 <span style={styles.quantity}>2</span>
               </td>
               <td className={styles.td}>
-                <span style={styles.total}>40</span>
+                <span style={styles.total}>₹40</span>
               </td>
             </tr>
-            <tr>
+            <tr className={styles.tr}>
               <td className={styles.td}>
                 <div>
                   <img src="/img/pizza.png" alt="" className={styles.img} />
@@ -57,13 +60,13 @@ function Cart() {
                 </span>
               </td>
               <td className={styles.td}>
-                <span style={styles.price}>20</span>
+                <span style={styles.price}>₹20</span>
               </td>
               <td className={styles.td}>
                 <span style={styles.quantity}>2</span>
               </td>
               <td className={styles.td}>
-                <span style={styles.total}>40</span>
+                <span style={styles.total}>₹40</span>
               </td>
             </tr>
           </tbody>
@@ -73,15 +76,15 @@ function Cart() {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Subtotal:</b>$79.60
+            <b className={styles.totaltextTitle}>Subtotal:</b>₹79.60
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Discount:</b>$79.60
+            <b className={styles.totaltextTitle}>Discount:</b>₹79.60
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Total:</b>$79.60
+            <b className={styles.totaltextTitle}>Total:</b>₹79.60
           </div>
-          <button className={styles.checkoutBtn}>CHECKOUT NOW!</button>
+          <button className={styles.checkoutBtn}  onClick={goToPayment}>CHECKOUT NOW!</button>
         </div>
       </div>
     </div>

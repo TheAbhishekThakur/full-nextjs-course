@@ -23,6 +23,19 @@
   text-align: center;
   color: #777;
   line-height: 1.5em;
-  height: 6em;      
+  height: 6em;
   overflow: hidden;
+}
+
+@media screen and (max-width: 480px) {
+  .cardContainer {
+    width: 100%;
+  }
+  .pizzaTitle {
+    font-size: 30px;
+  }
+  .pizzaPrice,
+  .pizzaDesc {
+    font-size: 24px;
+  }
 }

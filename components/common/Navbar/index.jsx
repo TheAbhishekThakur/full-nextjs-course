@@ -8,12 +8,14 @@ const Navbar = () => {
     <div className={styles.container}>
       <div className={styles.item}>
         <div className={styles.callBtn}>
-          <Image
-            src="/img/telephone.png"
-            alt="phoneno"
-            width={32}
-            height={32}
-          />
+          <Link href="/">
+            <Image
+              src="/img/telephone.png"
+              alt="phoneno"
+              width={32}
+              height={32}
+            />
+          </Link>
         </div>
         <div className={styles.texts}>
           <div className={styles.text}>ORDER NOW!</div>
@@ -22,7 +24,9 @@ const Navbar = () => {
       </div>
       <div className={styles.item}>
         <ul className={styles.list}>
-          <li className={styles.listItem}><Link href="/">Homepage</Link></li>
+          <li className={styles.listItem}>
+            <Link href="/">Homepage</Link>
+          </li>
           <li className={styles.listItem}>Products</li>
           <li className={styles.listItem}>Menu</li>
           <Image src="/img/abhishek.png" alt="logo" width={160} height={69} />
@@ -33,7 +37,9 @@ const Navbar = () => {
       </div>
       <div className={styles.item}>
         <div className={styles.cart}>
-          <Image src="/img/cart.png" alt="logo" width={30} height={30} />
+          <Link href="/cart">
+            <Image src="/img/cart.png" alt="logo" width={30} height={30} />
+          </Link>
           <div className={styles.counter}>2</div>
         </div>
       </div>
