@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import styles from "../../styles/PizzaDetails.module.css";
 import Image from "next/image";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addPizza } from "../../redux/slices/cartSlice";
 
 const PizzaDetails = ({ data }) => {
+  const dispatch = useDispatch();
   const [size, setSize] = useState(0);
   const [price, setPrice] = useState(data.prices[0]);
   const [extras, setExtras] = useState([]);
@@ -29,6 +32,10 @@ const PizzaDetails = ({ data }) => {
       changePrice(-option.price);
       setExtras(extras.filter((ex) => ex._id !== option._id));
     }
+  };
+
+  const addCart = () => {
+    dispatch(addPizza({ ...data, extras, price, qty }));
   };
 
   return (
@@ -86,10 +93,7 @@ const PizzaDetails = ({ data }) => {
             onChange={(e) => setQty(e.target.value)}
             className={styles.quantity}
           />
-          <button
-            className={styles.button}
-            onClick={() => (window.location.href = "/cart")}
-          >
+          <button className={styles.button} onClick={addCart}>
             Add to Cart
           </button>
         </div>
