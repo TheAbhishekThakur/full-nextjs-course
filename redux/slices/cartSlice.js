@@ -14,7 +14,9 @@ const cartSlice = createSlice({
       state.cartCount += 1;
     },
     reset: (state) => {
-      state = initialState;
+      state.pizzaList = [];
+      state.total = 0;
+      state.cartCount = 0;
     },
   },
 });
