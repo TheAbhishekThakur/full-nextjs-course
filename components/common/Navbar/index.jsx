@@ -34,7 +34,9 @@ const Navbar = () => {
           </li>
           <li className={styles.listItem}>Menu</li>
           <li className={styles.listItem}>Blog</li>
-          <li className={styles.listItem}>Contact</li>
+          <li className={styles.listItem}>
+            <Link href="/contact">Contact</Link>
+          </li>
         </ul>
       </div>
       <div className={styles.item}>
