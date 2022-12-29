@@ -3,9 +3,7 @@ import styles from "../../../styles/PizzaCard.module.css";
 import Image from "next/image";
 import Link from "next/Link";
 
-function PizzaCard({ key, data }) {
-  console.log({ data });
- 
+function PizzaCard({ key, data }) { 
   return (
     <div className={styles.cardContainer} key={key}>
       <Link href={`/pizza/${data._id}`}>

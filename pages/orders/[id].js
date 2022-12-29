@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import styles from "../../styles/Order.module.css";
+import axios from "axios";
 
-const Order = () => {
-  const [status, setStatus] = useState(0);
+const Order = ({ order }) => {
+  const [status, setStatus] = useState(order.status);
 
   const statusClass = (index) => {
     if (index - status < 1) {
@@ -32,16 +33,16 @@ const Order = () => {
             <tbody>
               <tr className={styles.tr}>
                 <td className={styles.td}>
-                  <span className={styles.id}>123456789</span>
+                  <span className={styles.id}>{order._id}</span>
                 </td>
                 <td className={styles.td}>
-                  <span className={styles.name}>Abhishek</span>
+                  <span className={styles.name}>{order.customer}</span>
                 </td>
                 <td className={styles.td}>
-                  <span style={styles.address}>Noida, UP</span>
+                  <span style={styles.address}>{order.address}</span>
                 </td>
                 <td className={styles.td}>
-                  <span style={styles.total}>40</span>
+                  <span style={styles.total}>{order.total}</span>
                 </td>
               </tr>
             </tbody>
@@ -118,13 +119,13 @@ const Order = () => {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Subtotal:</b>$79.60
+            <b className={styles.totaltextTitle}>Subtotal:</b>${order.total}
           </div>
           <div className={styles.totalText}>
             <b className={styles.totaltextTitle}>Discount:</b>$79.60
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Total:</b>$79.60
+            <b className={styles.totaltextTitle}>Total:</b>${order.total}
           </div>
           <button className={styles.checkoutBtn} disabled>
             PAID
@@ -136,3 +137,12 @@ const Order = () => {
 };
 
 export default Order;
+
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  return {
+    props: {
+      order: res.data,
+    },
+  };
+};

@@ -1,4 +1,17 @@
 Paypal Integration
 ------------------
-https://paypal.github.io/react-paypal-js/?path=/docs/example-paypalbuttons--default
-https://www.youtube.com/watch?v=Z-hACIsjv4E&list=RDCMUCOxWrX5MIdXIeRNaXC3sqIg&index=2
+https://www.npmjs.com/package/@paypal/react-paypal-js
+
+Sandbox Account Details
+-----------------------
+	Business
+	--------
+	Email - sb-dcgw022345363@business.example.com
+	Password - zJ0.75Xk
+
+
+	personal
+	--------
+	Email - sb-wu7ko24548376@personal.example.com
+	Password - [=GoJ*G5
+	Mob No - 2025971437
