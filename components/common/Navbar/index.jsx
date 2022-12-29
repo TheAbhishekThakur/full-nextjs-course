@@ -29,10 +29,10 @@ const Navbar = () => {
           <li className={styles.listItem}>
             <Link href="/">Homepage</Link>
           </li>
-          <li className={styles.listItem}>Products</li>
+          <li className={styles.listItem}>
+            <Link href="/products">Products</Link>
+          </li>
           <li className={styles.listItem}>Menu</li>
-          <Image src="/img/abhishek.png" alt="logo" width={160} height={69} />
-          <li className={styles.listItem}>Events</li>
           <li className={styles.listItem}>Blog</li>
           <li className={styles.listItem}>Contact</li>
         </ul>
