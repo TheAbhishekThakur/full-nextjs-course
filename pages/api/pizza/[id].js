@@ -23,7 +23,9 @@ export default async function handler(req, res) {
   }
   if (method === "PUT") {
     try {
-      const pizza = await Pizza.create(req.body);
+      const pizza = await Pizza.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
       if (pizza) {
         res.status(201).json({ success: true, data: pizza });
       } else {
@@ -37,9 +39,9 @@ export default async function handler(req, res) {
   }
   if (method === "DELETE") {
     try {
-      const pizza = await Pizza.create(req.body);
-      if (pizza) {
-        res.status(201).json({ success: true, data: pizza });
+      const data = await Pizza.findByIdAndDelete(id);
+      if (data) {
+        res.status(200).json({ success: true, data });
       } else {
         res
           .status(500)
