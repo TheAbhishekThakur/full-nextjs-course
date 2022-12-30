@@ -26,3 +26,14 @@
 .button:last-child {
   background-color: crimson;
 }
+
+.addPizzaButton{
+  background-color: teal;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  height: 40px;
+  margin: 50px 0px 0px 50px;
+  border-radius: 5px;
+}

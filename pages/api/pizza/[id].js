@@ -5,8 +5,11 @@ export default async function handler(req, res) {
   const {
     method,
     query: { id },
+    cookies,
   } = req;
   dbConnect();
+  const token = cookies.token;
+
   if (method === "GET") {
     try {
       const pizza = await Pizza.findById(id);
@@ -22,6 +25,11 @@ export default async function handler(req, res) {
     }
   }
   if (method === "PUT") {
+    if (!token) {
+      res
+        .status(401)
+        .json({ success: false, message: "You are not authenticated" });
+    }
     try {
       const pizza = await Pizza.findByIdAndUpdate(id, req.body, {
         new: true,
@@ -38,6 +46,11 @@ export default async function handler(req, res) {
     }
   }
   if (method === "DELETE") {
+    if (!token) {
+      res
+        .status(401)
+        .json({ success: false, message: "You are not authenticated" });
+    }
     try {
       const data = await Pizza.findByIdAndDelete(id);
       if (data) {
