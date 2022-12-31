@@ -13,6 +13,7 @@ const Order = ({ order }) => {
     if (order !== null) {
       setLoader(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const statusClass = (index) => {

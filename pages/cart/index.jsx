@@ -26,6 +26,7 @@ function Cart() {
     if (cart) {
       setLoader(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createOrder = async (data) => {

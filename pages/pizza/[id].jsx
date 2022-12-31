@@ -24,6 +24,7 @@ const PizzaDetails = ({ data }) => {
     if (data) {
       setLoader(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSize = (idx) => {

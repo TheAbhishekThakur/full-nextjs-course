@@ -13,13 +13,14 @@ export default function Home({ pizzaData }) {
     if (pizzaData !== null) {
       setLoader(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className={styles.container}>
       <Head>
         <title>Pizza Restaurant</title>
         <meta name="description" content="Best pizza shop..." />
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <Slider />
       {loader && <Loader />}
