@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/Order.module.css";
 import axios from "axios";
 import Loader from "../../components/common/Loader";
+import { API_BASE_URL } from "../../util/constant";
 
 const Order = ({ order }) => {
   const [status, setStatus] = useState(order.status);
@@ -156,7 +157,7 @@ const Order = ({ order }) => {
 export default Order;
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  const res = await axios.get(`${API_BASE_URL}/orders/${params.id}`);
   return {
     props: {
       order: res.data,

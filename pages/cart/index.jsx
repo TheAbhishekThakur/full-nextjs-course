@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import Modal from "../../components/common/OrderDetailsModal";
 import Loader from "../../components/common/Loader";
+import { API_BASE_URL } from "../../util/constant";
 
 function Cart() {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ function Cart() {
 
   const createOrder = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/orders", data);
+      const res = await axios.post(`${API_BASE_URL}/orders`, data);
       if (res && res.status === 201) {
         router.push("/orders/" + res.data._id);
         dispatch(reset());

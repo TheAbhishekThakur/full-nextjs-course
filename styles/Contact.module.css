@@ -5,6 +5,14 @@
   justify-content: space-between;
 }
 
+.contactInfo{
+  padding: 30px;
+}
+
+.paragraph{
+  color: #777;
+}
+
 .item {
   flex: 3;
   display: flex;

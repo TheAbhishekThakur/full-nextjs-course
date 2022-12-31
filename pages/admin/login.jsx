@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/Login.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { API_BASE_URL } from "../../util/constant";
 
 function Login() {
   const router = useRouter();
@@ -18,7 +19,7 @@ function Login() {
         email,
         password,
       };
-      const res = await axios.post("http://localhost:3000/api/login", payload);
+      const res = await axios.post(`${API_BASE_URL}/login`, payload);
       if (res && res.status === 200) {
         setErr(false);
         router.push("/admin");

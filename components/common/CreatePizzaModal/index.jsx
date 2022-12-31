@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../../styles/CreatePizzaModal.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { API_BASE_URL } from "../../../util/constant";
 
 function Modal({ setModal }) {
   const [file, setFile] = useState(null);
@@ -39,7 +40,7 @@ function Modal({ setModal }) {
         extraOptions,
         image: url,
       };
-      await axios.post("http://localhost:3000/api/pizza", newProduct);
+      await axios.post(`${API_BASE_URL}/pizza`, newProduct);
       setModal(false);
     } catch (err) {
       console.error(err);

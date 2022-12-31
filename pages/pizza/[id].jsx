@@ -5,7 +5,10 @@ import Image from "next/image";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addPizza } from "../../redux/slices/cartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/common/Loader";
+import { API_BASE_URL } from "../../util/constant";
 
 const PizzaDetails = ({ data }) => {
   const dispatch = useDispatch();
@@ -13,6 +16,8 @@ const PizzaDetails = ({ data }) => {
   const [price, setPrice] = useState(data.prices[0]);
   const [extras, setExtras] = useState([]);
   const [qty, setQty] = useState(1);
+
+  const notify = () => toast("Your product has been added in cart.");
 
   const [loader, setLoader] = useState(true);
   useEffect(() => {
@@ -43,11 +48,25 @@ const PizzaDetails = ({ data }) => {
   };
 
   const addCart = () => {
+    notify();
     dispatch(addPizza({ ...data, extras, price, qty }));
   };
 
   return (
     <div className={styles.detailsContainer}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
       <div className={styles.left}>
         <div className={styles.imgCon}>
           <img
@@ -116,7 +135,7 @@ export default PizzaDetails;
 
 export const getServerSideProps = async ({ params }) => {
   const pizzaId = params.id;
-  const res = await axios.get(`http://localhost:3000/api/pizza/${pizzaId}`);
+  const res = await axios.get(`${API_BASE_URL}/pizza/${pizzaId}`);
   return {
     props: {
       data: res.data.data,

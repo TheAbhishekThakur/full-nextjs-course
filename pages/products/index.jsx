@@ -3,6 +3,7 @@ import PizzaCard from "../../components/PizzaList/components/PizzaCard";
 import axios from "axios";
 import styles from "../../styles/Products.module.css";
 import Loader from "../../components/common/Loader";
+import { API_BASE_URL } from "../../util/constant";
 
 function ProductList({ pizzaData }) {
   const [search, setSearch] = useState("");
@@ -24,7 +25,7 @@ function ProductList({ pizzaData }) {
 
   const callNextPageApi = async (value) => {
     const res = await axios.get(
-      `http://localhost:3000/api/pizza?search=${search}&page=${value}&limit=8`
+      `${API_BASE_URL}/pizza?search=${search}&page=${value}&limit=8`
     );
     if (res && res.status === 200) {
       setPizzaList([...pizzaList, ...res.data.data]);
@@ -36,7 +37,7 @@ function ProductList({ pizzaData }) {
   const callSearchApi = async () => {
     if (search) {
       const res = await axios.get(
-        `http://localhost:3000/api/pizza?search=${search}&page=${page}&limit=8`
+        `${API_BASE_URL}/pizza?search=${search}&page=${page}&limit=8`
       );
       if (res && res.status === 200) {
         setPizzaList(res.data.data);
@@ -85,7 +86,7 @@ function ProductList({ pizzaData }) {
 export default ProductList;
 
 export const getServerSideProps = async () => {
-  const res = await axios.get(`http://localhost:3000/api/pizza?page=1&limit=8`);
+  const res = await axios.get(`${API_BASE_URL}/pizza?page=1&limit=8`);
   return {
     props: {
       pizzaData: res.data.data,

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import styles from "../../styles/Contact.module.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { API_BASE_URL } from "../../util/constant";
 
 function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+
+  const notify = () => toast("Your data has been successfully submitted.");
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +23,7 @@ function Contact() {
         message,
       };
       const res = await axios.post(
-        "http://localhost:3000/api/contact",
+        `${API_BASE_URL}/contact`,
         payload
       );
       console.log(res);
@@ -27,7 +32,7 @@ function Contact() {
         setEmail("");
         setPhone("");
         setMessage("");
-        alert("Your data has been successfully submitted.");
+        notify();
       } else {
         alert("Inter Server Error!");
       }
@@ -39,19 +44,32 @@ function Contact() {
 
   return (
     <div className={styles.container}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
       <div className={styles.item}>
-        <div>
+        <div className={styles.contactInfo}>
           <h1>Contact Info</h1>
-          <p>
+          <p className={styles.paragraph}>
             Do you have something you’d like to enquire about or let us know? We
             love it when people message us. Whether it’s a comment, a
             suggestion, or a plan to save the planet, we look forward to hearing
             from you. Please leave us a message below.
           </p>
-          <p> Advertise with us: abhishek84411@gmail.com.com </p>
-          <p>Name: Abhishek Thakur</p>
-          <p>Mob No: 9507061639</p>
-          <p>Address: Sector 63A, Noida</p>
+          <div><b>Advertise with us:</b> abhishek84411@gmail.com.com </div>
+          <div><b>Name:</b> Abhishek Thakur</div>
+          <div><b>Mob No:</b> 9507061639</div>
+          <div><b>Address:</b> Sector 63A, Noida</div>
         </div>
       </div>
       <div className={styles.item}>

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { use, useState } from "react";
 import styles from "../../styles/Admin.module.css";
 import Modal from "../../components/common/CreatePizzaModal"
+import { API_BASE_URL } from "../../util/constant";
 
 function Admin({ orders, pizzas }) {
   const [pizzaList, setPizzaList] = useState(pizzas);
@@ -13,7 +14,7 @@ function Admin({ orders, pizzas }) {
 
   const deleteProduct = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/api/pizza/${id}`);
+      const res = await axios.delete(`${API_BASE_URL}/pizza/${id}`);
       if (res) {
         setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
       }
@@ -25,7 +26,7 @@ function Admin({ orders, pizzas }) {
     const item = orderList.filter((order) => order._id === id)[0];
     const currentStatus = item.status;
     try {
-      const res = await axios.put(`http://localhost:3000/api/orders/${id}`, {
+      const res = await axios.put(`${API_BASE_URL}/orders/${id}`, {
         status: currentStatus + 1,
       });
       if (res) {
@@ -167,8 +168,8 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const products = await axios.get("http://localhost:3000/api/pizza");
-  const orders = await axios.get("http://localhost:3000/api/orders");
+  const products = await axios.get(`${API_BASE_URL}/pizza`);
+  const orders = await axios.get(`${API_BASE_URL}/orders`);
 
   return {
     props: {

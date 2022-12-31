@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 import Loader from "../components/common/Loader";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../util/constant";
 
 export default function Home({ pizzaData }) {
   const [loader, setLoader] = useState(true);
@@ -28,7 +29,7 @@ export default function Home({ pizzaData }) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/pizza");
+  const res = await axios.get(`${API_BASE_URL}/pizza`);
   return {
     props: {
       pizzaData: res.data.data,
