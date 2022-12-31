@@ -7,10 +7,11 @@ export default async function handler(req, res) {
   const token = cookies.token;
 
   if (req.query && req.query.search) {
-    const searchQuery = req.query.search;
-    let regex = new RegExp(searchQuery, "i");
     try {
-      const list = await Pizza.find({ title: regex });
+      let { page, limit, search } = req.query;
+      let skip = (page - 1) * limit;
+      let regex = new RegExp(search, "i");
+      const list = await Pizza.find({ title: regex }).skip(skip).limit(limit);
       if (!list) {
         res
           .status(500)
@@ -23,7 +24,9 @@ export default async function handler(req, res) {
   } else {
     if (method === "GET") {
       try {
-        const list = await Pizza.find();
+        let { page, limit } = req.query;
+        let skip = (page - 1) * limit;
+        const list = await Pizza.find().skip(skip).limit(limit);
         if (!list) {
           res
             .status(500)

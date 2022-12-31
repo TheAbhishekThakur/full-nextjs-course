@@ -9,16 +9,34 @@ function ProductList({ pizzaData }) {
   const [searchStr, setSearchStr] = useState("");
   const [loader, setLoader] = useState(true);
   const [pizzaList, setPizzaList] = useState(pizzaData);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     if (pizzaData !== null) {
       setLoader(false);
     }
   }, []);
 
+  const viewMore = () => {
+    setPage(page + 1);
+    callNextPageApi(page + 1);
+  };
+
+  const callNextPageApi = async (value) => {
+    const res = await axios.get(
+      `http://localhost:3000/api/pizza?search=${search}&page=${value}&limit=8`
+    );
+    if (res && res.status === 200) {
+      setPizzaList([...pizzaList, ...res.data.data]);
+      setSearchStr(search);
+      setSearch("");
+    }
+  };
+
   const callSearchApi = async () => {
     if (search) {
       const res = await axios.get(
-        `http://localhost:3000/api/pizza?search=${search}`
+        `http://localhost:3000/api/pizza?search=${search}&page=${page}&limit=8`
       );
       if (res && res.status === 200) {
         setPizzaList(res.data.data);
@@ -27,6 +45,7 @@ function ProductList({ pizzaData }) {
       }
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.searchInput}>
@@ -54,7 +73,9 @@ function ProductList({ pizzaData }) {
           : null}
       </div>
       <div className={styles.viewBtn}>
-        <button className={styles.button}>View More</button>
+        <button className={styles.button} onClick={viewMore}>
+          View More
+        </button>
       </div>
       {loader && <Loader />}
     </div>
@@ -64,7 +85,7 @@ function ProductList({ pizzaData }) {
 export default ProductList;
 
 export const getServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/pizza");
+  const res = await axios.get(`http://localhost:3000/api/pizza?page=1&limit=8`);
   return {
     props: {
       pizzaData: res.data.data,
