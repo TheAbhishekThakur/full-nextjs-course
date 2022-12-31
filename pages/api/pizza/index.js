@@ -6,10 +6,11 @@ export default async function handler(req, res) {
   dbConnect();
   const token = cookies.token;
 
-  if (method === "GET") {
+  if (req.query && req.query.search) {
+    const searchQuery = req.query.search;
+    let regex = new RegExp(searchQuery, "i");
     try {
-      const list = await Pizza.find();
-      console.log("list", list);
+      const list = await Pizza.find({ title: regex });
       if (!list) {
         res
           .status(500)
@@ -19,7 +20,22 @@ export default async function handler(req, res) {
     } catch (err) {
       res.status(500).json(err);
     }
+  } else {
+    if (method === "GET") {
+      try {
+        const list = await Pizza.find();
+        if (!list) {
+          res
+            .status(500)
+            .json({ success: false, message: "Internal Server Error" });
+        }
+        res.status(200).json({ success: true, data: list });
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    }
   }
+
   if (method === "POST") {
     if (!token) {
       res
