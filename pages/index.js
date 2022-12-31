@@ -3,8 +3,16 @@ import Slider from "../components/Slider";
 import PizzaList from "../components/PizzaList";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
+import Loader from "../components/common/Loader";
+import { useEffect, useState } from "react";
 
 export default function Home({ pizzaData }) {
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    if (pizzaData !== null) {
+      setLoader(false);
+    }
+  }, []);
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +21,7 @@ export default function Home({ pizzaData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Slider />
+      {loader && <Loader />}
       <PizzaList pizzaData={pizzaData} />
     </div>
   );

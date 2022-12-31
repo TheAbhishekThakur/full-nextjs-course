@@ -1,10 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Order.module.css";
 import axios from "axios";
+import Loader from "../../components/common/Loader";
 
 const Order = ({ order }) => {
   const [status, setStatus] = useState(order.status);
+  const [loader, setLoader] = useState(true);
+
+  useEffect(() => {
+    if (order !== null) {
+      setLoader(false);
+    }
+  }, []);
 
   const statusClass = (index) => {
     if (index - status < 1) {
@@ -54,6 +62,7 @@ const Order = ({ order }) => {
               src="/img/paid.png"
               alt=""
               style={{ width: "30px", height: "30px" }}
+              loading="lazy"
             />
             <span>Payment</span>
             <div className={styles.checkedIcon}>
@@ -62,6 +71,7 @@ const Order = ({ order }) => {
                 alt=""
                 className={styles.checked}
                 style={{ width: "20px", height: "20px" }}
+                loading="lazy"
               />
             </div>
           </div>
@@ -70,6 +80,7 @@ const Order = ({ order }) => {
               src="/img/bake.png"
               alt=""
               style={{ width: "30px", height: "30px" }}
+              loading="lazy"
             />
             <span>Preparing</span>
             <div className={styles.checkedIcon}>
@@ -78,6 +89,7 @@ const Order = ({ order }) => {
                 alt=""
                 className={styles.checked}
                 style={{ width: "20px", height: "20px" }}
+                loading="lazy"
               />
             </div>
           </div>
@@ -86,6 +98,7 @@ const Order = ({ order }) => {
               src="/img/bike.png"
               alt=""
               style={{ width: "30px", height: "30px" }}
+              loading="lazy"
             />
             <span>On The Way</span>
             <div className={styles.checkedIcon}>
@@ -94,6 +107,7 @@ const Order = ({ order }) => {
                 alt=""
                 className={styles.checked}
                 style={{ width: "20px", height: "20px" }}
+                loading="lazy"
               />
             </div>
           </div>
@@ -102,6 +116,7 @@ const Order = ({ order }) => {
               src="/img/delivered.png"
               alt=""
               style={{ width: "30px", height: "30px" }}
+              loading="lazy"
             />
             <span>Delivered</span>
             <div className={styles.checkedIcon}>
@@ -110,6 +125,7 @@ const Order = ({ order }) => {
                 alt=""
                 className={styles.checked}
                 style={{ width: "20px", height: "20px" }}
+                loading="lazy"
               />
             </div>
           </div>
@@ -132,6 +148,7 @@ const Order = ({ order }) => {
           </button>
         </div>
       </div>
+      {loader && <Loader />}
     </div>
   );
 };

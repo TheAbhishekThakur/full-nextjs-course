@@ -24,7 +24,7 @@ const Slider = () => {
     >
       {images.map((item, index) => (
         <div key={index.toString()}>
-          <img src={item} alt={index.toString()} className={styles.img} />
+          <img src={item} alt={index.toString()} className={styles.img} loading="lazy" />
         </div>
       ))}
     </Carousel>

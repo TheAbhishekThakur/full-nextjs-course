@@ -10,7 +10,7 @@ function PizzaCard({ key, data }) {
         <Image src={data.image} alt="pizza" width={260} height={260} />
       </Link>
       <h1 className={styles.pizzaTitle}>{data.title}</h1>
-      <span className={styles.pizzaPrice}>₹{data.prices[0]}</span>
+      <span className={styles.pizzaPrice}>${data.prices[0]}</span>
       <p className={styles.pizzaDesc}>{data.desc}</p>
     </div>
   );

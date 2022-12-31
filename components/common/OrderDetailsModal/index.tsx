@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../../styles/OrderDetailsModal.module.css";
 
-function Modal({ total, createOrder }) {
+function Modal({ total, createOrder, setOpenCashModal }) {
   const [customer, setCustomer] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
@@ -19,7 +19,10 @@ function Modal({ total, createOrder }) {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>You will pay $12 after delivery.</h1>
+        <span className={styles.close} onClick={() => setOpenCashModal(false)}>
+          X
+        </span>
+        <h1 className={styles.title}>You will pay ${total} after delivery.</h1>
         <form onSubmit={onSubmit} className={styles.form}>
           <div className={styles.item}>
             <label className={styles.label}>Name</label>

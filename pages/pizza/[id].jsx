@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/PizzaDetails.module.css";
 import Image from "next/image";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addPizza } from "../../redux/slices/cartSlice";
+import Loader from "../../components/common/Loader";
 
 const PizzaDetails = ({ data }) => {
   const dispatch = useDispatch();
@@ -12,6 +13,13 @@ const PizzaDetails = ({ data }) => {
   const [price, setPrice] = useState(data.prices[0]);
   const [extras, setExtras] = useState([]);
   const [qty, setQty] = useState(1);
+
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    if (data) {
+      setLoader(false);
+    }
+  }, []);
 
   const handleSize = (idx) => {
     const diff = data.prices[idx] - data.prices[size];
@@ -47,12 +55,13 @@ const PizzaDetails = ({ data }) => {
             alt="pizza"
             className={styles.pizzaImg}
             style={{ width: "100%", height: "500px" }}
+            loading="lazy"
           />
         </div>
       </div>
       <div className={styles.right}>
         <h1 className={styles.title}>{data.title}</h1>
-        <span className={styles.price}>{`₹${price}`}</span>
+        <span className={styles.price}>{`$${price}`}</span>
         <p className={styles.desc}>{data.desc}</p>
         <h3 className={styles.choose} style={{ marginBottom: "40px" }}>
           Choose Your Size
@@ -98,6 +107,7 @@ const PizzaDetails = ({ data }) => {
           </button>
         </div>
       </div>
+      {loader && <Loader />}
     </div>
   );
 };

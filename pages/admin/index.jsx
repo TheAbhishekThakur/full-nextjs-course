@@ -70,6 +70,7 @@ function Admin({ orders, pizzas }) {
                         src={item.image}
                         alt={item.title}
                         style={{ width: "50px", height: "50px" }}
+                        loading="lazy"
                       />
                     </td>
                     <td className={styles.td}>

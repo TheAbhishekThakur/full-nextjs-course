@@ -11,6 +11,7 @@ import {
 } from "@paypal/react-paypal-js";
 import axios from "axios";
 import Modal from "../../components/common/OrderDetailsModal";
+import Loader from "../../components/common/Loader";
 
 function Cart() {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,13 @@ function Cart() {
   const dispatch = useDispatch();
   const router = useRouter();
   const cart = useSelector((state) => state.cart);
+  const [loader, setLoader] = useState(true);
+
+  useEffect(() => {
+    if (cart) {
+      setLoader(false);
+    }
+  }, []);
 
   const createOrder = async (data) => {
     try {
@@ -51,7 +59,7 @@ function Cart() {
                 <tr className={styles.tr} key={index}>
                   <td className={styles.td}>
                     <div>
-                      <img src={item.image} alt="" className={styles.img} />
+                      <img src={item.image} alt="" className={styles.img} loading="lazy" />
                     </div>
                   </td>
                   <td className={styles.td}>
@@ -66,13 +74,13 @@ function Cart() {
                       ))}
                   </td>
                   <td className={styles.td}>
-                    <span style={styles.price}>₹{item.price}</span>
+                    <span style={styles.price}>${item.price}</span>
                   </td>
                   <td className={styles.td}>
                     <span style={styles.quantity}>{item.qty}</span>
                   </td>
                   <td className={styles.td}>
-                    <span style={styles.total}>₹{item.price * item.qty}</span>
+                    <span style={styles.total}>${item.price * item.qty}</span>
                   </td>
                 </tr>
               ))}
@@ -83,13 +91,13 @@ function Cart() {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Subtotal:</b>₹{cart.total}
+            <b className={styles.totaltextTitle}>Subtotal:</b>${cart.total}
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Discount:</b>₹0.00
+            <b className={styles.totaltextTitle}>Discount:</b>$0.00
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totaltextTitle}>Total:</b>₹{cart.total}
+            <b className={styles.totaltextTitle}>Total:</b>${cart.total}
           </div>
           {open ? (
             <div className={styles.paymentMethods}>
@@ -149,7 +157,8 @@ function Cart() {
           )}
         </div>
       </div>
-      {openCashModal && <Modal total={cart.total} createOrder={createOrder} />}
+      {openCashModal && <Modal total={cart.total} createOrder={createOrder} setOpenCashModal={setOpenCashModal} />}
+      {loader && <Loader />}
     </div>
   );
 }
