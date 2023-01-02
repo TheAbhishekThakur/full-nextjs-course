@@ -13,7 +13,7 @@
 .searchInput {
   display: flex;
   align-items: flex-end;
-  justify-content: end;
+  justify-content: flex-end;
   width: 92%;
   margin-top: 40px;
 }
