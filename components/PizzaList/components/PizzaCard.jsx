@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/PizzaCard.module.css";
 import Image from "next/image";
-import Link from "next/Link";
+import Link from "next/link";
 
 function PizzaCard({ key, data }) { 
   return (
