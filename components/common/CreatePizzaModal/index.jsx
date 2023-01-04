@@ -29,9 +29,10 @@ function Modal({ setModal }) {
   const handleCreate = async () => {
     const data = new FormData();
     data.append("file", file);
-    data.append("upload_preset", "uploads");
+    data.append("upload_preset", "foodapp");
     try {
-      const uploadRes = await axios.post("", data);
+      const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/do2f6lg9d/image/upload", data);
+      console.log('uploadRes', uploadRes)
       const { url } = uploadRes.data;
       const newProduct = {
         title,
