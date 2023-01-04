@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "../../../styles/Navbar.module.css";
-import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ const Navbar = () => {
       <div className={styles.item}>
         <div className={styles.callBtn}>
           <Link href="/">
-            <Image
+            <img
               src="/img/telephone.png"
               alt="phoneno"
               width={32}
@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className={styles.item}>
         <div className={styles.cart}>
           <Link href="/cart">
-            <Image src="/img/cart.png" alt="logo" width={30} height={30} />
+            <img src="/img/cart.png" alt="logo" width={30} height={30} />
           </Link>
           <div className={styles.counter}>{cartCount}</div>
         </div>
