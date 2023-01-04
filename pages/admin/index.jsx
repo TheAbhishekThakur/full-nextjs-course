@@ -1,14 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import axios from "axios";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import styles from "../../styles/Admin.module.css";
 import Modal from "../../components/common/CreatePizzaModal"
 import { API_BASE_URL } from "../../util/constant";
+import Loader from "../../components/common/Loader";
 
 function Admin({ orders, pizzas }) {
   const [pizzaList, setPizzaList] = useState(pizzas);
   const [orderList, setOrderList] = useState(orders);
   const [modal, setModal] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
 
   const status = ["Preparing", "On the way", "Delivered"];
 
@@ -22,6 +24,10 @@ function Admin({ orders, pizzas }) {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    setShowLoader(false)
+  }, [pizzaList, orderList])
   const handleStatus = async (id) => {
     const item = orderList.filter((order) => order._id === id)[0];
     const currentStatus = item.status;
@@ -148,6 +154,7 @@ function Admin({ orders, pizzas }) {
           </table>
         </div>
       </div>
+      {showLoader && <Loader />}
       {modal && <Modal setModal={setModal} />}
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "../../../styles/CreatePizzaModal.module.css";
-import { useRouter } from "next/router";
 import axios from "axios";
 import { API_BASE_URL } from "../../../util/constant";
+import Loader from "../Loader";
 
 function Modal({ setModal }) {
   const [file, setFile] = useState(null);
@@ -11,6 +11,7 @@ function Modal({ setModal }) {
   const [prices, setPrices] = useState([]);
   const [extra, setExtra] = useState(null);
   const [extraOptions, setExtraOptions] = useState([]);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleExtraInput = (e) => {
     setExtra({ ...extra, [e.target.name]: e.target.value });
@@ -31,8 +32,12 @@ function Modal({ setModal }) {
     data.append("file", file);
     data.append("upload_preset", "foodapp");
     try {
-      const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/do2f6lg9d/image/upload", data);
-      console.log('uploadRes', uploadRes)
+      setShowLoader(true);
+      const uploadRes = await axios.post(
+        "https://api.cloudinary.com/v1_1/do2f6lg9d/image/upload",
+        data
+      );
+      console.log("uploadRes", uploadRes);
       const { url } = uploadRes.data;
       const newProduct = {
         title,
@@ -42,6 +47,7 @@ function Modal({ setModal }) {
         image: url,
       };
       await axios.post(`${API_BASE_URL}/pizza`, newProduct);
+      setShowLoader(false);
       setModal(false);
     } catch (err) {
       console.error(err);
@@ -61,11 +67,21 @@ function Modal({ setModal }) {
         </div>
         <div className={styles.item}>
           <label className={styles.label}>Title</label>
-          <input type="text" placeholder="title" className={styles.input} />
+          <input
+            type="text"
+            placeholder="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className={styles.input}
+          />
         </div>
         <div className={styles.item}>
           <label className={styles.label}>Description</label>
-          <textarea placeholder="description" />
+          <textarea
+            placeholder="description"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          />
         </div>
         <div className={styles.item}>
           <label className={styles.label}>Prices</label>
@@ -124,6 +140,7 @@ function Modal({ setModal }) {
           Create
         </button>
       </div>
+      {showLoader && <Loader />}
     </div>
   );
 }
